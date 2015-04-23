@@ -1,8 +1,5 @@
 package com.berkkarabacak.scarce;
-
-
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -11,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -33,14 +29,7 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-
-
-
     }
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -68,12 +57,14 @@ public class MainActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
-private CallbackManager callbackManager;
+        private CallbackManager callbackManager;
         private FacebookCallback<LoginResult>callback=new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 AccessToken accessToken=loginResult.getAccessToken();
                 Profile profile=Profile.getCurrentProfile();
+                Intent intent = new Intent(getActivity().getApplicationContext(), com.berkkarabacak.scarce.Profile.class);
+                startActivity(intent);
 
             }
 
@@ -84,7 +75,6 @@ private CallbackManager callbackManager;
 
             @Override
             public void onError(FacebookException e) {
-
             }
         };
         public PlaceholderFragment() {
@@ -96,7 +86,6 @@ private CallbackManager callbackManager;
             super.onCreate(savedInstanceState);
             FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
             callbackManager=CallbackManager.Factory.create();
-
 
         }
 
@@ -111,7 +100,7 @@ private CallbackManager callbackManager;
             loginButton.setFragment(this);
             loginButton.registerCallback(callbackManager,callback);
             return rootView;
-        }
+            }
 
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
