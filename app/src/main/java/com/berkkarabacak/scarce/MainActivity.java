@@ -61,10 +61,14 @@ public class MainActivity extends ActionBarActivity {
         private FacebookCallback<LoginResult>callback=new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+
+                //Is there problem here?
                 AccessToken accessToken=loginResult.getAccessToken();
                 Profile profile=Profile.getCurrentProfile();
-                Intent intent = new Intent(getActivity().getApplicationContext(), com.berkkarabacak.scarce.Profile.class);
+                Intent intent = new Intent(getActivity(), com.berkkarabacak.scarce.Profile.class);
                 startActivity(intent);
+                //Is there problem here?
+
 
             }
 
